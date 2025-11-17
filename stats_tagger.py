@@ -42,6 +42,8 @@ outcome_shortcuts = {
     'w' : 'wide',
     'c' : 'complete',
     'i' : 'incomplete',
+    'won' : 'won',
+    'lost' : 'lost',
 }
 
 def get_event(event):

@@ -96,11 +96,6 @@ def parse_event(event):
     return [event_name, outcome_name, player_no]
 
 
-for code in test_inputs:
-    print(code, "->", parse_event(code))
-
-
-'''
 match_events=[]
 
 def inputEvent():
@@ -110,4 +105,4 @@ def inputEvent():
 event = inputEvent()
 
 while inputEvent()!="end game":
-    inputEvent()'''
+    inputEvent()

@@ -60,7 +60,8 @@ def get_outcome(event, remaining_text):
         return None, remaining_text
     
     # Get possible list of outcome shortcuts from dictionary
-    possible_outcomes = outcome_shortcuts.keys()
+    possible_outcomes = outcomes[event]
+    
     for o in sorted(possible_outcomes, key = len, reverse = True):
         # If text starts with outcome shortcut
         if remaining_text.startswith(o):
@@ -95,7 +96,7 @@ def parse_event(event):
     return [event_name, outcome_name, player_no]
 
 # Test
-test_inputs = ["s22", "sw15", "tisu4", "ko22won"]
+test_inputs = ["s22", "sw15", "tisu4", "ko22won", "ss23", "sw15", "se", "ss", "kos", "kow", "kowon", "kolost", "kol", "kog"]
 
 for code in test_inputs:
     print(code, "->", parse_event(code))

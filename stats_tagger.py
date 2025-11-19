@@ -40,8 +40,8 @@ def get_player_no(remaining_text):
 
 
 def parse_event(event):
-    # Get event code and format it
-    event = event.strip().lower()
+    # Get event code and format it to remove all whitespace and make lowercase
+    event = event.strip().lower().replace(" ","")
     # Used Chat GPT to help generate the below 3 lines
     event_code, event_name, remaining = get_event(event)
     if event_name is None:
@@ -56,14 +56,6 @@ def parse_event(event):
     # Return event, outcome and player number
     return [event_name, outcome_name, player_no]
 
-
-match_events=[]
-
 def inputEvent():
     e = input("Enter match event: ")
     return e
-
-event = inputEvent()
-
-while inputEvent()!="end game":
-    inputEvent()

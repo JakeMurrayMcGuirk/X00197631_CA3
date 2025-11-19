@@ -15,7 +15,7 @@ test_inputs = ["s22", "sw15", "tisu4",
 expected_output = [
     ['shot', None, "22"],
     ['shot', 'wide', '15'],
-    ['tackle', None, '4'],
+    ['tackle', 'incomplete', '4'],
     ['kickout', None, None],
     ['shot', None ,'23'],
     ['shot', 'wide', '15'],

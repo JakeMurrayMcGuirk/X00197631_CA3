@@ -1,11 +1,6 @@
 import re
 from utils import events, event_shortcuts, outcomes, outcome_shortcuts
 
-def get_teams():
-    team1 = input("Enter team 1 name: ")
-    team2 = input("Enter team 2 name: ")
-
-
 
 def get_event(event):
     # Used ChatGPT to help with function to match event shortcuts WITHIN text

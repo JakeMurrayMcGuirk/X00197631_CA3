@@ -1,5 +1,5 @@
 trigger:
-- main
+- master
 - development
 
 pool:
@@ -12,7 +12,7 @@ steps:
     addToPath: true
 
 - script: |
-    pip install pylint
+    pip install -r dependencies.txt
     pylint **/*.py
   displayName: 'Run pylint'
 

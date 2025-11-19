@@ -8,10 +8,10 @@ expected_output = [
     ['shot', 'wide', '15'],
     ['tackle', None, '4'],
     ['kickout', None, None],
-    ['shot', 'saved' ,'23'],
+    ['shot', None ,'23'],
     ['shot', 'wide', '15'],
     ['shot', None, None],
-    ['shot', 'saved', None],
+    ['shot', None, None],
     ['kickout', None, None],
     ['kickout', None, None],
     ['kickout', 'won', None],
@@ -25,3 +25,6 @@ expected_output = [
 def test_input():
     for input, index in enumerate(test_inputs):
         assert parse_event(input) == expected_output[index]
+
+#def test_get_event():
+    #

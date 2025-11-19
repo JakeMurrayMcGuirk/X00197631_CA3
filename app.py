@@ -17,3 +17,4 @@ while event.strip().lower()!="end game":
             print(attempt_parse)
         else:
             print("Invalid event entered")
+    event = inputEvent()

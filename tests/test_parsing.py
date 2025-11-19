@@ -27,5 +27,5 @@ def test_input():
         assert parse_event(input) == expected_output[index]
 
 def test_get_event():
-    assert get_event("sg69696969") == ["sg", "start game", "69696969"]
-    assert get_event("f14") == ["f", "foul", "14"]
+    assert get_event("sg69696969") == ("sg", "start game", "69696969") # Chat GPT used to find errors with changing lists to tuples
+    assert get_event("f14") == ("f", "foul", "14")

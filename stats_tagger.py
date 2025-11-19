@@ -15,10 +15,20 @@ def get_outcome(event, remaining_text):
     if event not in outcomes:
         return None, remaining_text
     
-    # Get possible list of outcome shortcuts from dictionary
-    possible_outcomes = outcomes[event]
+    # Get possible list of outcome shortcuts from list based on event
+    possible_full_outcomes = outcomes[event]
+
+    # Creates empty dict to store all possible shortcut values
+    valid_shortcuts = {}
+
+    # Iterates through all shortcuts and their full name pairings in the outcome_shortcuts dictionary
+    for sc, full in outcome_shortcuts:
+        # If the full name is in the possible_full_outcomes list then append pairing to dictionary
+        if full in possible_full_outcomes:
+            valid_shortcuts[sc] = full
+
     
-    for o in sorted(possible_outcomes, key = len, reverse = True):
+    for o in sorted(valid_shortcuts, key = len, reverse = True):
         # If text starts with outcome shortcut
         if remaining_text.startswith(o):
             # Returns outcome shortcut, remaining text

@@ -1,4 +1,6 @@
+# Import dependencies
 import pytest
+# Import functions to be tested from stats_tagger.py
 from stats_tagger import parse_event, get_event, get_outcome, get_player_no
 
 # Test input values for test_parse_input
@@ -29,10 +31,13 @@ expected_output = [
     ['foul', None, '15'],
     ['foul', None, None]
 ]
+
+# Function to test the parse_event function
 def test_parse_input():
     for index, input in enumerate(test_inputs):
         assert parse_event(input) == expected_output[index]
 
+# Tests the get_event function in stats_tagger.py
 def test_get_event():
     assert get_event("sg69696969") == ("sg", "start game", "69696969") # Chat GPT used to find errors with changing lists to tuples
     assert get_event("f14") == ("f", "foul", "14")

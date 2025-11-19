@@ -1,8 +1,15 @@
 import pytest
 from stats_tagger import parse_event, get_event, get_outcome, get_player_no
 
-# Test
-test_inputs = ["s22", "sw15", "tisu4", "ko22won", "ss23", "sw15", "se", "ss", "kos", "kow", "kowon", "kolost", "kol", "kog", "f16", "fg15", "f"]
+# Test input values for test_parse_input
+test_inputs = ["s22", "sw15", "tisu4",
+               "ko22won", "ss23", "sw15",
+               "se", "ss", "kos",
+               "kow", "kowon", "kolost",
+               "kol", "kog", "f16",
+               "fg15", "f"]
+
+# Expected output values for test_parse_input
 expected_output = [
     ['shot', None, "22"],
     ['shot', 'wide', '15'],
@@ -22,7 +29,7 @@ expected_output = [
     ['foul', None, '15'],
     ['foul', None, None]
 ]
-def test_input():
+def test_parse_input():
     for index, input in enumerate(test_inputs):
         assert parse_event(input) == expected_output[index]
 

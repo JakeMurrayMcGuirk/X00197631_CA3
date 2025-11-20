@@ -58,11 +58,11 @@ def test_get_event_rules():
     assert get_event_rules(None) == None
 
 def test_validate_event():
-    assert validate_event("shot", "g696969", {'outcome': True, 'player_no':True}) == True
-    assert validate_event("foul", "14", {'outcome':False, 'player_no':True}) == True
-    assert validate_event("shot", "w5", {'outcome': True, 'player_no':True}) == True
-    assert validate_event("pass", "ofr65", {'outcome':True, 'player_no':True}) == True
-    assert validate_event(None, "zk69", None) == False
+    assert validate_event("shot", "g696969", {'outcome': True, 'player_no':True})
+    assert validate_event("foul", "14", {'outcome':False, 'player_no':True})
+    assert validate_event("shot", "w5", {'outcome': True, 'player_no':True})
+    assert validate_event("pass", "ofr65", {'outcome':True, 'player_no':True})
+    assert validate_event(None, "zk69", None) is False
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''

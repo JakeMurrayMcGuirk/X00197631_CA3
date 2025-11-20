@@ -1,7 +1,7 @@
 '''Tests for the functions in stats_tagger.py'''
 
 # Import functions to be tested from stats_tagger.py
-from app.stats_tagger import parse_event, get_event, get_outcome, get_player_no, print_event
+from app.stats_tagger import parse_event, get_event, get_outcome, get_player_no
 from app.utils import delete_event, show_help
 
 # Test input values for test_parse_input
@@ -73,7 +73,3 @@ def test_delete_event():
 def test_show_help():
     '''Ensures the show_help function is functioning correctly'''
     assert show_help() == 'To enter an event please follow the following format: event outcome (if applicable) player no.(if applicable)\nE.g. foul by player 14 = f14\n\'delete\' removes the most recently input event'
-
-def test_print_event():
-    '''Ensures print_event is working correctly'''
-    assert print_event(["shot", "goal", "14"]) == ["shot", "goal", "14"]

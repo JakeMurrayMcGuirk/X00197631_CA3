@@ -82,7 +82,3 @@ def input_event():
     e = input("Enter match event: ")
     e = e.strip().lower()
     return e
-
-def print_event(event):
-    '''Displays the event to console'''
-    print(event)

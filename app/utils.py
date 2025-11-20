@@ -13,8 +13,8 @@ def delete_event(match_events):
     return 0
 
 commands = {
-    'help' : show_help(),
-    'delete' : delete_event()
+    'help' : show_help,
+    'delete' : delete_event
 }
 
 events = [

@@ -34,7 +34,7 @@ def validate_event(event_name, remaining_text, ruleset):
         if remaining_text==None:
             return False
         # Use regex to check if remaining text is just a digit
-        elif (re.search(r"^d+"), remaining_text):
+        elif (re.search(r"^\d+"), remaining_text):
             return False
         else:
             return True

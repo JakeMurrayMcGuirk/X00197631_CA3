@@ -6,7 +6,7 @@ Checks that input is not "end game"
 Calls parse_event and stores the output (if any) in list match_events
 Repeats
 '''
-from app.stats_tagger import parse_event, input_event, print_event
+from app.stats_tagger import parse_event, input_event
 from app.utils import commands
 
 match_events = []

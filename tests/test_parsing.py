@@ -70,6 +70,7 @@ def test_validate_event():
     assert validate_event("begin game", "", {'outcome':False, 'player_no':False}) is True
     assert validate_event("end half", "", {'outcome':False, 'player_no':False}) is True
     assert validate_event("start half", "", {'outcome':False, 'player_no':False}) is True
+    assert validate_event("foul", None, {'outcome':False, 'player_no':True}) is True
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''

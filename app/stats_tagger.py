@@ -29,6 +29,9 @@ def validate_event(event_name, remaining_text, ruleset):
     # Check if event name is null
     if event_name is None:
         return False
+    # Checks if remaining_text is None
+    if remaining_text is None:
+        remaining_text=""
     # If ruleset allows for outcome and player_no
     if ruleset['outcome'] and ruleset['player_no']:
         if remaining_text is None:
@@ -40,10 +43,10 @@ def validate_event(event_name, remaining_text, ruleset):
     # If ruleset only allows for player_no and no outcome (e.g. foul)
     if ruleset['outcome'] is False and ruleset['player_no']:
         # If there is remaining text and it is not a digit
-        if re.search(r"^\d+", remaining_text) is False and remaining_text!="":
+        if not re.search(r"^\d+", remaining_text) and remaining_text!="":
             return False
         # If remaining text is blank or a number
-        if remaining_text=="" or re.search(r"^\d+", remaining_text):
+        if remaining_text is not None or remaining_text=="" or re.search(r"^\d+", remaining_text):
             return True
     if ruleset['outcome'] is False and ruleset['player_no'] is False:
         if remaining_text is not None and remaining_text!="":

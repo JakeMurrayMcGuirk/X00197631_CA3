@@ -23,9 +23,9 @@ while event!="end game" and event !="eg":
             commands[event]
     else:
         attempt_parse = parse_event(event)
-        if attempt_parse:
+        if attempt_parse is not None:
             match_events.append(attempt_parse)
-            print_event()
+            print(attempt_parse)
         else:
             print("Invalid event entered")
     event = input_event()

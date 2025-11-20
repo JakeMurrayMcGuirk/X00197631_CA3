@@ -58,11 +58,18 @@ def test_get_event_rules():
     assert get_event_rules(None) == None
 
 def test_validate_event():
+    '''Checks whether expected validation values are met by the validate_event function'''
     assert validate_event("shot", "g696969", {'outcome': True, 'player_no':True})
     assert validate_event("foul", "14", {'outcome':False, 'player_no':True})
     assert validate_event("shot", "w5", {'outcome': True, 'player_no':True})
     assert validate_event("pass", "ofr65", {'outcome':True, 'player_no':True})
     assert validate_event(None, "zk69", None) is False
+    assert validate_event("begin game", "wergferg4") is False
+    assert validate_event("end game", "2389t54hg") is False
+    assert validate_event("shot", "f16") is True
+    assert validate_event("begin game") is True
+    assert validate_event("end half") is True
+    assert validate_event("start half") is True
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''
@@ -71,6 +78,7 @@ def test_get_outcome():
     assert get_outcome("shot", "w5") == ("wide", "5")
     assert get_outcome("pass", "ofr65") == (None, "ofr65")
     assert get_outcome(None, "zk69") == (None, "zk69")
+    assert get_outcome("shot", "f16") == (None, "f16")
 
 def test_get_player_no():
     '''Tests the get_player_no function in stats_tagger.py'''
@@ -79,6 +87,7 @@ def test_get_player_no():
     assert get_player_no("5") == "5"
     assert get_player_no("ofr65") == "65"
     assert get_player_no("zk69") == "69"
+    assert get_player_no("player_five") is None
 
 def test_delete_event():
     '''Tests that delete_event is working correctly'''

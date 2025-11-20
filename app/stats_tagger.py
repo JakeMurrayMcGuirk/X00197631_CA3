@@ -1,8 +1,11 @@
+'''Functions that collect user inputs and parse them into events'''
+# Importing dependencies
 import re
 from app.utils import events, event_shortcuts, outcomes, outcome_shortcuts
 
 
 def get_event(event):
+    '''Takes user input and gets the event code and event name from the input'''
     # Used ChatGPT to help with function to match event shortcuts WITHIN text
     for e in event_shortcuts:
         if event.startswith(e):
@@ -11,6 +14,7 @@ def get_event(event):
     return None, None, event
 
 def get_outcome(event, remaining_text):
+    '''Takes in a string and extracts the outcome'''
     # Checks if the event is in a list of possible outcomes
     if event not in outcomes:
         return None, remaining_text
@@ -37,6 +41,8 @@ def get_outcome(event, remaining_text):
 
 
 def get_player_no(remaining_text):
+    '''Extracts player number from an inputted string'''
+    # Regex search to find a number if at end of string
     player_no = re.search("\d+$", remaining_text)
     if player_no:
         player_no = player_no.group()
@@ -45,6 +51,7 @@ def get_player_no(remaining_text):
 
 
 def parse_event(event):
+    '''Takes input and calls the above functions to parse it into an full event (event, outcome, player no)'''
     # Get event code and format it to remove all whitespace and make lowercase
     event = event.strip().lower().replace(" ","")
     # Used Chat GPT to help generate the below 3 lines
@@ -62,5 +69,6 @@ def parse_event(event):
     return [event_name, outcome_name, player_no]
 
 def inputEvent():
+    '''Takes event input from user'''
     e = input("Enter match event: ")
     return e

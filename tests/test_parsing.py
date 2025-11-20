@@ -71,6 +71,7 @@ def test_validate_event():
     assert validate_event("end half", "", {'outcome':False, 'player_no':False}) is True
     assert validate_event("start half", "", {'outcome':False, 'player_no':False}) is True
     assert validate_event("foul", None, {'outcome':False, 'player_no':True}) is True
+    assert validate_event(None, None, None) is False
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''
@@ -81,6 +82,7 @@ def test_get_outcome():
     assert get_outcome(None, "zk69") == (None, "zk69")
     assert get_outcome("shot", "f16") == (None, "f16")
     assert get_outcome("shot", "16") == (None, "16")
+    assert get_outcome(None, None) == (None, None)
 
 def test_get_player_no():
     '''Tests the get_player_no function in stats_tagger.py'''

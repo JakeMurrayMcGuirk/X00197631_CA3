@@ -5,6 +5,9 @@ from app.utils import event_shortcuts, outcomes, outcome_shortcuts, event_catego
 
 def get_event(event):
     '''Takes user input and gets the event code and event name from the input'''
+    # If event is null return None
+    if event is None:
+        return None
     # Used ChatGPT to help with function to match event shortcuts WITHIN text
     for e in event_shortcuts:
         if event.startswith(e):

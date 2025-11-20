@@ -67,7 +67,7 @@ def parse_event(event):
     # Return event, outcome and player number
     return [event_name, outcome_name, player_no]
 
-def inputEvent():
+def input_event():
     '''Takes event input from user'''
     e = input("Enter match event: ")
     return e

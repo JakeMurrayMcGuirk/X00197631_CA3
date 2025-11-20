@@ -48,19 +48,6 @@ event_categories = {
     'foul' :  ['foul']
 }
 
-possible_params = {
-    'time' : 0,
-    'begin game' : 0,
-    'end half' : 0,
-    'start half' : 0,
-    'end game' : 0,
-    'shot' : 3,
-    'kickout' : 3,
-    'tackle' : 2,
-    'pass' : 2,
-    'foul' : 1
-}
-
 param_rules = {
     # Default ruleset
     'play' : {

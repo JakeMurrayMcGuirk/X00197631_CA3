@@ -28,7 +28,7 @@ def validate_event(event_name, remaining_text, ruleset):
     '''Validates that user input is valid'''
     # Check if event name is null
     if event_name is None:
-        return None
+        return False
     # If ruleset allows for outcome and player_no
     if ruleset['outcome'] and ruleset['player_no']:
         if remaining_text==None:
@@ -40,10 +40,11 @@ def validate_event(event_name, remaining_text, ruleset):
             return True
     # If ruleset only allows for player_no and no outcome (e.g. foul)
     if ruleset['outcome']==False and ruleset['player_no']:
-        if (re.search(r"^d+"), remaining_text)==False:
+        # If there is remaining text and it is not a digit
+        if (re.search(r"^\d+", remaining_text))==False and remaining_text!="":
             return False
         # If remaining text is blank or a number
-        elif remaining_text==None or (re.search(r"^d+"), remaining_text):
+        elif remaining_text=="" or (re.search(r"^\d+", remaining_text)):
             return True
     if ruleset['outcome']==False and ruleset['player_no']==False:
         if remaining_text!=None:
@@ -103,8 +104,9 @@ def parse_event(event):
     # Get ruleset for event
     ruleset = get_event_rules(event_name)
 
-    # Validate event input is valid
-    validate_event(event_name, remaining, ruleset)
+    # Validate event input is valid. Returns None if not
+    if validate_event(event_name, remaining, ruleset)==False:
+        return None
 
     # Get outcome code
     outcome_name, remaining = get_outcome(event_name, remaining)

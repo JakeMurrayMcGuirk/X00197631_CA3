@@ -1,7 +1,7 @@
 '''Functions that collect user inputs and parse them into events'''
 # Importing dependencies
 import re
-from app.utils import event_shortcuts, outcomes, outcome_shortcuts, event_categories, possible_params, param_rules
+from app.utils import event_shortcuts, outcomes, outcome_shortcuts, event_categories, param_rules
 
 def get_event(event):
     '''Takes user input and gets the event code and event name from the input'''
@@ -39,14 +39,14 @@ def validate_event(event_name, remaining_text, ruleset):
         else:
             return True
     # If ruleset only allows for player_no and no outcome (e.g. foul)
-    if ruleset['outcome']==False and ruleset['player_no']:
+    if ruleset['outcome'] is False and ruleset['player_no']:
         # If there is remaining text and it is not a digit
-        if (re.search(r"^\d+", remaining_text))==False and remaining_text!="":
+        if (re.search(r"^\d+", remaining_text)) is False and remaining_text!="":
             return False
         # If remaining text is blank or a number
         elif remaining_text=="" or (re.search(r"^\d+", remaining_text)):
             return True
-    if ruleset['outcome']==False and ruleset['player_no']==False:
+    if ruleset['outcome'] is False and ruleset['player_no'] is False:
         if remaining_text!=None:
             return False
         else:
@@ -68,7 +68,7 @@ def get_outcome(event, remaining_text):
 
     # Iterates through all shortcut and full name pairings in the outcome_shortcuts dictionary
     for sc, full in outcome_shortcuts.items():
-        # If full name is in possible_full_outcomes then append pairing to dictionary valid_shortcuts
+        # If full name is in possible_full_outcomes: append pairing to valid_shortcuts
         if full in possible_full_outcomes:
             valid_shortcuts[sc] = full
 
@@ -105,7 +105,7 @@ def parse_event(event):
     ruleset = get_event_rules(event_name)
 
     # Validate event input is valid. Returns None if not
-    if validate_event(event_name, remaining, ruleset)==False:
+    if validate_event(event_name, remaining, ruleset) is False:
         return None
 
     # Get outcome code

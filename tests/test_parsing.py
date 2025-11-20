@@ -51,11 +51,11 @@ def test_get_event():
 
 def test_get_event_rules():
     '''Tests that the get_event_rules function is retrieving the correct rulesets'''
-    assert get_event_rules("shot", "g69696969") == {'outcome': True, 'player_no':True}
-    assert get_event_rules("foul", "14") == {'outcome':False, 'player_no':True}
-    assert get_event_rules("shot", "w5") == {'outcome': True, 'player_no':True}
-    assert get_event_rules("pass", "ofr65") == {'outcome':True, 'player_no':True}
-    assert get_event_rules(None, "zk69") == None
+    assert get_event_rules("shot") == {'outcome': True, 'player_no':True}
+    assert get_event_rules("foul") == {'outcome':False, 'player_no':True}
+    assert get_event_rules("shot") == {'outcome': True, 'player_no':True}
+    assert get_event_rules("pass") == {'outcome':True, 'player_no':True}
+    assert get_event_rules(None) == None
 
 def test_validate_event():
     assert validate_event("shot", "g696969", {'outcome': True, 'player_no':True}) == True

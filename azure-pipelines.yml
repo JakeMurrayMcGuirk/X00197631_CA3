@@ -13,6 +13,13 @@ steps:
 
 - script: |
     pip install -r dependencies.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    pytest **/*.py
+  displayName: 'Run pytest'
+
+- script: |
     pylint **/*.py
   displayName: 'Run pylint'
 

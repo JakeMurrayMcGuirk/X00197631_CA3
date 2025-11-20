@@ -46,7 +46,7 @@ def validate_event(event_name, remaining_text, ruleset):
         if remaining_text=="" or re.search(r"^\d+", remaining_text):
             return True
     if ruleset['outcome'] is False and ruleset['player_no'] is False:
-        if remaining_text is not None:
+        if remaining_text is not None and remaining_text!="":
             return False
         return True
     # If none of the above is true return false

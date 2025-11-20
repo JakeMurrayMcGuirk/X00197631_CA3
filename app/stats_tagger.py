@@ -57,7 +57,7 @@ def parse_event(event):
     event_name, remaining = get_event(event)
     if event_name is None:
         return None
-    
+
     # Get outcome code
     outcome_name, remaining = get_outcome(event_name, remaining)
 

@@ -8,7 +8,8 @@ def delete_event(match_events):
     '''Deletes a specified event from the user'''
     if match_events:
         match_events = match_events[:-1]
-    return match_events
+        return match_events
+    return 0
 
 commands = {
     'help' : show_help(),

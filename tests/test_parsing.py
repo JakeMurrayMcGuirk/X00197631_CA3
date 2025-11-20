@@ -1,7 +1,8 @@
 '''Tests for the functions in stats_tagger.py'''
 
 # Import functions to be tested from stats_tagger.py
-from app.stats_tagger import parse_event, get_event, get_outcome, get_player_no
+from app.stats_tagger import parse_event, get_event, get_outcome, get_player_no, print_event
+from app.utils import delete_event, show_help
 
 # Test input values for test_parse_input
 test_inputs = ["s22", "sw15", "tisu4",
@@ -63,3 +64,10 @@ def test_get_player_no():
     assert get_player_no("5") == "5"
     assert get_player_no("ofr65") == "65"
     assert get_player_no("zk69") == "69"
+
+def test_print_event():
+    assert delete_event([]) == 0
+    assert delete_event([["start game", None, None], ["shot", "goal", "15"], ["pass", "complete", None]]) == [["start game", None, None], ["shot", "goal", "15"]]
+
+def test_show_help():
+    assert show_help() == 'To enter an event please follow the following format: event outcome (if applicable) player no.(if applicable)\nE.g. foul by player 14 = f14\n\'delete\' removes the most recently input event'

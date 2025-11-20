@@ -36,8 +36,7 @@ def validate_event(event_name, remaining_text, ruleset):
         # Use regex to check if remaining text is just a digit
         if re.search(r"^\d+", remaining_text):
             return False
-        else:
-            return True
+        return True
     # If ruleset only allows for player_no and no outcome (e.g. foul)
     if ruleset['outcome'] is False and ruleset['player_no']:
         # If there is remaining text and it is not a digit
@@ -47,10 +46,9 @@ def validate_event(event_name, remaining_text, ruleset):
         if remaining_text=="" or re.search(r"^\d+", remaining_text):
             return True
     if ruleset['outcome'] is False and ruleset['player_no'] is False:
-        if remaining_text!=None:
+        if remaining_text is not None:
             return False
-        else:
-            return True
+        return True
     # If none of the above is true return false
     return False
 
@@ -115,7 +113,7 @@ def parse_event(event):
     player_no = get_player_no(remaining)
 
     # Final check that outcome_name is not null (except for time and foul events)
-    if ruleset['outcome'] and outcome_name==None:
+    if ruleset['outcome'] and outcome_name is None:
         return None
     # Create list to store event
     output_event = [event_name, outcome_name, player_no]

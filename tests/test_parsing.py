@@ -37,7 +37,8 @@ def test_parse_input():
 
 # Tests the get_event function in stats_tagger.py
 def test_get_event():
-    assert get_event("sg69696969") == ("sg", "start game", "69696969") # Chat GPT used to find errors with changing lists to tuples
+    # Chat GPT used to find errors with changing lists to tuples
+    assert get_event("sg69696969") == ("sg", "start game", "69696969")
     assert get_event("f14") == ("f", "foul", "14")
     assert get_event("sw5") == ("s", "shot", "w5")
     assert get_event("pofr65") == (None, None, "pofr65")

@@ -34,8 +34,8 @@ expected_output = [
 
 # Function to test the parse_event function
 def test_parse_input():
-    for index, input in enumerate(test_inputs):
-        assert parse_event(input) == expected_output[index]
+    for index, i in enumerate(test_inputs):
+        assert parse_event(i) == expected_output[index]
 
 # Tests the get_event function in stats_tagger.py
 def test_get_event():
@@ -44,19 +44,22 @@ def test_get_event():
     assert get_event("sw5") == ("s", "shot", "w5")
     assert get_event("pofr65") == (None, None, "pofr65")
 
+# Tests the get_outcome function in stats_tagger.py
 def test_get_outcome():
     assert get_outcome("69696969") == (None, "69696969")
     assert get_outcome("14") == (None, "14")
     assert get_outcome("w5") == ("wide", "5")
     assert get_outcome("pofr65") == (None, "pofr65")
 
+# Tests the get_player_no function in stats_tagger.py
 def test_get_player_no():
     assert get_player_no("69696969") == "69696969"
     assert get_outcome("14") == "14"
     assert get_outcome("5") == "5"
     assert get_outcome("pofr65") == "65"
 
+# Call above functions
 test_parse_input()
 test_get_event()
-test_get_outcome
-test_get_player_no
+test_get_outcome()
+test_get_player_no()

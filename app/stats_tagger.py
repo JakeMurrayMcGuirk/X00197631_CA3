@@ -1,5 +1,5 @@
 import re
-from utils import events, event_shortcuts, outcomes, outcome_shortcuts
+from app.utils import events, event_shortcuts, outcomes, outcome_shortcuts
 
 
 def get_event(event):

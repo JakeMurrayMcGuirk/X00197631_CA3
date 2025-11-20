@@ -1,7 +1,7 @@
 '''Tests for the functions in stats_tagger.py'''
 
 # Import functions to be tested from stats_tagger.py
-from stats_tagger import parse_event, get_event, get_outcome, get_player_no
+from app.stats_tagger import parse_event, get_event, get_outcome, get_player_no
 
 # Test input values for test_parse_input
 test_inputs = ["s22", "sw15", "tisu4",
@@ -42,21 +42,24 @@ def test_parse_input():
 def test_get_event():
     '''Tests the get_event function in stats_tagger.py'''
     # Chat GPT used to find errors with changing lists to tuples
-    assert get_event("sg69696969") == ("sg", "start game", "69696969")
+    assert get_event("sg69696969") == ("s", "shot", "g69696969")
     assert get_event("f14") == ("f", "foul", "14")
     assert get_event("sw5") == ("s", "shot", "w5")
-    assert get_event("pofr65") == (None, None, "pofr65")
+    assert get_event("pofr65") == ("p", "pass", "ofr65")
+    assert get_event("zk69") == (None, None, "zk69")
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''
-    assert get_outcome("69696969") == (None, "69696969")
-    assert get_outcome("14") == (None, "14")
-    assert get_outcome("w5") == ("wide", "5")
-    assert get_outcome("pofr65") == (None, "pofr65")
+    assert get_outcome("shot", "g69696969") == ("goal", "69696969")
+    assert get_outcome("foul", "14") == (None, "14")
+    assert get_outcome("shot", "w5") == ("wide", "5")
+    assert get_outcome("pass", "ofr65") == (None, "ofr65")
+    assert get_outcome(None, "zk69") == (None, "zk69")
 
 def test_get_player_no():
     '''Tests the get_player_no function in stats_tagger.py'''
     assert get_player_no("69696969") == "69696969"
     assert get_player_no("14") == "14"
     assert get_player_no("5") == "5"
-    assert get_player_no("pofr65") == "65"
+    assert get_player_no("ofr65") == "65"
+    assert get_player_no("zk69") == "69"

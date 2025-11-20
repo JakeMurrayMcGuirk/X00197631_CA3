@@ -1,3 +1,5 @@
+'''Tests for the functions in stats_tagger.py'''
+
 # Import functions to be tested from stats_tagger.py
 from stats_tagger import parse_event, get_event, get_outcome, get_player_no
 

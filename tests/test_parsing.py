@@ -55,7 +55,7 @@ def test_get_event_rules():
     assert get_event_rules("foul") == {'outcome':False, 'player_no':True}
     assert get_event_rules("shot") == {'outcome': True, 'player_no':True}
     assert get_event_rules("pass") == {'outcome':True, 'player_no':True}
-    assert get_event_rules(None) == None
+    assert get_event_rules(None) is None
 
 def test_validate_event():
     '''Checks whether expected validation values are met by the validate_event function'''
@@ -64,12 +64,12 @@ def test_validate_event():
     assert validate_event("shot", "w5", {'outcome': True, 'player_no':True})
     assert validate_event("pass", "ofr65", {'outcome':True, 'player_no':True})
     assert validate_event(None, "zk69", None) is False
-    assert validate_event("begin game", "wergferg4") is False
-    assert validate_event("end game", "2389t54hg") is False
-    assert validate_event("shot", "f16") is True
-    assert validate_event("begin game") is True
-    assert validate_event("end half") is True
-    assert validate_event("start half") is True
+    assert validate_event("begin game", "wergferg4", {'outcome':False, 'player_no':False}) is False
+    assert validate_event("end game", "2389t54hg", {'outcome':False, 'player_no':False}) is False
+    assert validate_event("shot", "f16", {'outcome': True, 'player_no':True}) is True
+    assert validate_event("begin game", "", {'outcome':False, 'player_no':False}) is True
+    assert validate_event("end half", "", {'outcome':False, 'player_no':False}) is True
+    assert validate_event("start half", "", {'outcome':False, 'player_no':False}) is True
 
 def test_get_outcome():
     '''Tests the get_outcome function in stats_tagger.py'''

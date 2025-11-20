@@ -1,17 +1,52 @@
 '''Functions that collect user inputs and parse them into events'''
 # Importing dependencies
 import re
-from app.utils import event_shortcuts, outcomes, outcome_shortcuts
-
+from app.utils import event_shortcuts, outcomes, outcome_shortcuts, event_categories, possible_params, param_rules
 
 def get_event(event):
     '''Takes user input and gets the event code and event name from the input'''
     # Used ChatGPT to help with function to match event shortcuts WITHIN text
     for e in event_shortcuts:
         if event.startswith(e):
-            # Return the shortcut code, full event name, and remaining text
+            # Return the full event name, and remaining text
             return event_shortcuts[e], event[len(e):]
     return None, event
+
+def get_event_rules(event_name):
+    '''Get and return the ruleset for the input event'''
+    # Iterate through event_categories
+    for e in event_categories:
+        if event_name in event_categories[e]:
+            event_category = e
+    # Get ruleset from param_rules
+    ruleset = param_rules[event_category]
+    return ruleset
+
+def validate_event(event_name, remaining_text, ruleset):
+    '''Validates that user input is valid'''
+    # If ruleset allows for outcome and player_no
+    if ruleset['outcome'] and ruleset['player_no']:
+        if remaining_text==None:
+            return False
+        # Use regex to check if remaining text is just a digit
+        elif (re.search(r"^d+"), remaining_text):
+            return False
+        else:
+            return True
+    # If ruleset only allows for player_no and no outcome (e.g. foul)
+    if ruleset['outcome']==False and ruleset['player_no']:
+        if (re.search(r"^d+"), remaining_text)==False:
+            return False
+        # If remaining text is blank or a number
+        elif remaining_text==None or (re.search(r"^d+"), remaining_text):
+            return True
+    if ruleset['outcome']==False and ruleset['player_no']==False:
+        if remaining_text!=None:
+            return False
+        else:
+            return True
+    # If none of the above is true return false
+    return False
 
 def get_outcome(event, remaining_text):
     '''Takes in a string and extracts the outcome'''
@@ -57,12 +92,15 @@ def parse_event(event):
     The leftover text after is fed into get_player_no to extract player no.
     All is returned to caller function.
     '''
-    # Get event code and format it to remove all whitespace and make lowercase
-    event = event.strip().lower().replace(" ","")
     # Used Chat GPT to help generate the below 3 lines
     event_name, remaining = get_event(event)
     if event_name is None:
         return None
+    # Get ruleset for event
+    ruleset = get_event_rules(event_name)
+
+    # Validate event input is valid
+    validate_event(event_name, remaining, ruleset)
 
     # Get outcome code
     outcome_name, remaining = get_outcome(event_name, remaining)
@@ -72,7 +110,6 @@ def parse_event(event):
 
     # Return event, outcome and player number
     output_event = [event_name, outcome_name, player_no]
-    print_event(output_event)
     return output_event
 
 def input_event():
@@ -80,5 +117,6 @@ def input_event():
     Removes all leading and trailing whitespace and lowercases it
     '''
     e = input("Enter match event: ")
-    e = e.strip().lower()
+    # Get event code and format it to remove all whitespace and make lowercase
+    e = e.strip().lower().replace(" ", "")
     return e

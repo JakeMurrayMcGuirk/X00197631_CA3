@@ -30,28 +30,30 @@ expected_output = [
     ['foul', None, None]
 ]
 
-# Function to test the parse_event function
+
 def test_parse_input():
+    '''Tests the parse_event function in stats_tagger.py'''
     for index, i in enumerate(test_inputs):
         assert parse_event(i) == expected_output[index]
 
-# Tests the get_event function in stats_tagger.py
+
 def test_get_event():
+    '''Tests the get_event function in stats_tagger.py'''
     # Chat GPT used to find errors with changing lists to tuples
     assert get_event("sg69696969") == ("sg", "start game", "69696969")
     assert get_event("f14") == ("f", "foul", "14")
     assert get_event("sw5") == ("s", "shot", "w5")
     assert get_event("pofr65") == (None, None, "pofr65")
 
-# Tests the get_outcome function in stats_tagger.py
 def test_get_outcome():
+    '''Tests the get_outcome function in stats_tagger.py'''
     assert get_outcome("69696969") == (None, "69696969")
     assert get_outcome("14") == (None, "14")
     assert get_outcome("w5") == ("wide", "5")
     assert get_outcome("pofr65") == (None, "pofr65")
 
-# Tests the get_player_no function in stats_tagger.py
 def test_get_player_no():
+    '''Tests the get_player_no function in stats_tagger.py'''
     assert get_player_no("69696969") == "69696969"
     assert get_player_no("14") == "14"
     assert get_player_no("5") == "5"

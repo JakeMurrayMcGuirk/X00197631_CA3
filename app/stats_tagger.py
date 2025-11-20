@@ -7,7 +7,7 @@ from app.utils import event_shortcuts, outcomes, outcome_shortcuts
 def get_event(event):
     '''Takes user input and gets the event code and event name from the input'''
     # Used ChatGPT to help with function to match event shortcuts WITHIN text
-    for e in event_shortcuts:
+    for e in event_shortcuts.items():
         if event.startswith(e):
             # Return the shortcut code, full event name, and remaining text
             return e, event_shortcuts[e], event[len(e):]
@@ -31,7 +31,6 @@ def get_outcome(event, remaining_text):
         if full in possible_full_outcomes:
             valid_shortcuts[sc] = full
 
-    
     for o in sorted(valid_shortcuts, key = len, reverse = True):
         # If text starts with outcome shortcut
         if remaining_text.startswith(o):

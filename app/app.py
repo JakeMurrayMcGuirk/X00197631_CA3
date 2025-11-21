@@ -16,7 +16,7 @@ print("Enter an event in the format 'event outcome(if applicable) player no. (if
 "\nShot wide from player 12: sw14\nStart game:sg")
 event = input_event()
 
-while event!="end game" and event !="eg":
+while event not in ("end game", "eg"):
     event = event.strip().lower()
     if event in commands:
         if event=="delete":

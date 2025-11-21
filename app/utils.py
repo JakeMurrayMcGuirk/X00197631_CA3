@@ -1,4 +1,7 @@
-'''Contains all lists and dictionaries for events, event shortcuts, possible outcomes and outcome shortcuts'''
+'''Contains all lists and dictionaries for the app, and two functions.
+Functions: show_help(), delete_event()
+Lists: Events
+Dicts: Parameter rules, Event shortcuts, Event Categories, Outcomes, Outcome shortcuts'''
 
 def show_help():
     '''Displays format to enter events'''

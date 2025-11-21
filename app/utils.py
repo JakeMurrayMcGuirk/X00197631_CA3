@@ -5,10 +5,10 @@ Dicts: Parameter rules, Event shortcuts, Event Categories, Outcomes, Outcome sho
 
 def show_help():
     '''Displays format to enter events'''
-    help = 'To enter an event please follow the following format:' \
+    app_help = 'To enter an event please follow the following format:' \
     ' event outcome (if applicable) player no.(if applicable)' \
     '\nE.g. foul by player 14 = f14\n\'delete\' removes the most recently input event'
-    return help
+    return app_help
 
 
 def delete_event(match_events):

@@ -11,7 +11,9 @@ from app.utils import commands
 
 match_events = []
 
-print("Enter an event in the format 'event outcome(if applicable) player no. (if applicable)\nIf outcome or player no. not available, skip that section.\nE.g. foul commited by player 14: f14\nShot wide from player 12: sw14\nStart game:sg")
+print("Enter an event in the format 'event outcome(if applicable) player no. (if applicable)" \
+"\nIf outcome or player no. not available, skip that section.\nE.g. foul commited by player 14: f14" \
+"\nShot wide from player 12: sw14\nStart game:sg")
 event = input_event()
 
 while event!="end game" and event !="eg":

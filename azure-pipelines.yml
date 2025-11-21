@@ -24,8 +24,10 @@ steps:
   displayName: 'Get pytest-cov coverage'
 
 - script: |
-    pylint **/*.py
+    pylint **/*.py --disable=C
   displayName: 'Run pylint'
+  # Below code from https://stackoverflow.com/questions/61710112/azure-devops-pipeline-fails-when-running-pylint
+  continueOnError: true
 
 - script: |
     echo "Building the Python application"

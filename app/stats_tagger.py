@@ -137,6 +137,7 @@ def input_event():
     '''Takes event input from user
     Removes all leading and trailing whitespace and lowercases it
     '''
+    # Prompt user to enter input
     e = input("Enter match event: ")
     # Get event code and format it to remove all whitespace and make lowercase
     e = e.strip().lower().replace(" ", "")

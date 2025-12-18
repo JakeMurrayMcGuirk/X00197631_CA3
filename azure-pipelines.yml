@@ -49,8 +49,12 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'drop'
 
+
+
+
 - stage: SecurityScanning
   displayName: 'Security Scanning'
+  dependsOn: 'Build'
   jobs:
   - job: SecurityCheck
     displayName: 'Security Check'
@@ -103,3 +107,48 @@ stages:
         # Noise control
         redact: true                   # hide secret values in logs
         verbose: false                 # set true while tuning rules
+
+
+
+- stage: DependencySecurity
+  displayName: 'Dependency Security Scanning'
+  dependsOn: 'SecurityScanning'
+  jobs:
+  - job: OWASPCheck
+    steps:
+    - task: dependency-check-build-task@6
+      inputs:
+        projectName: '$(Build.Repository.Name)'
+        scanPath: '$(System.DefaultWorkingDirectory)'
+        format: 'HTML'
+        uploadReports: true
+        uploadSARIFReport: true
+        # failOnCVSS: '7' # <-- remove this line to avoid failing the job on high CVSS scores
+        nvdApiKey: 'your-nvd-api-key'  # Replace with your API key
+        additionalArguments: >
+          --disableCentral
+          --disableOssIndex
+
+
+- stage: DeployTest
+  displayName: 'Deploy to Test Environment'
+  dependsOn: DependencySecurity
+  jobs:
+  - deployment: DeployToTest
+    displayName: 'Deploy to Test'
+    environment: test
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(System.DefaultWorkingDirectory)'
+
+          - script: |
+              echo "Deploying application to Test environment"
+              ls
+            displayName: 'Simulate Test Deployment'

@@ -7,7 +7,7 @@ pool:
 
 
 stages:
-  stage: 'Build'
+- stage: 'Build'
   jobs:
     - job: 'Build'
       steps:
@@ -48,3 +48,58 @@ stages:
         inputs:
           pathToPublish: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'drop'
+
+- stage: SecurityScanning
+  displayName: 'Security Scanning'
+  jobs:
+  - job: SecurityCheck
+    displayName: 'Security Check'
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    # Make sure we have full git history so Gitleaks can scan commits
+    - checkout: self
+      fetchDepth: 0
+
+    # (Optional) still download build artifacts if you need them later
+    - task: DownloadBuildArtifacts@0
+      displayName: 'Download build outputs'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.DefaultWorkingDirectory)'
+
+    # --- Gitleaks: CredScan replacement ---
+    - task: Gitleaks@3
+      displayName: 'Gitleaks secret scan (CredScan replacement)'
+      inputs:
+        # Where to scan – normally your source repo
+        scanlocation: '$(Build.SourcesDirectory)'
+
+        # Use predefined config with CredScan rules ported in
+        configtype: 'predefined'
+        predefinedconfigfile: 'GitleaksUdmCombo.toml'
+        # Alt: 'UDMSecretChecksv8.toml' for “pure” CredScan rules
+
+        # Scan mode:
+        # - 'smart'    -> auto-detect best mode (PR, full, etc.)
+        # - 'all'      -> all commits
+        # - 'directory'-> only current files (no git history)
+        scanmode: 'smart'
+
+        # Task behaviour when secrets are found
+        taskfail: false                 # fail the task on findings
+        taskfailonexecutionerror: true # fail if Gitleaks crashes
+
+        # Reporting
+        reportformat: 'sarif'          # works with SARIF SAST tab
+        uploadresults: true
+        reportartifactname: 'CodeAnalysisLogs'
+        # reportfolder:  # default: agent temp
+        # reportname:    # default: gitleaks-<timestamp>.sarif
+
+        # Noise control
+        redact: true                   # hide secret values in logs
+        verbose: false                 # set true while tuning rules

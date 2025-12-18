@@ -5,41 +5,46 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.8'
-    addToPath: true
 
-- script: |
-    pip install -r dependencies.txt
-  displayName: 'Install dependencies'
+stages:
+  stage: 'Build'
+  jobs:
+    - job: 'Build'
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.8'
+          addToPath: true
 
-- script: |
-    pytest tests/test*.py
-  displayName: 'Run pytest'
+      - script: |
+          pip install -r dependencies.txt
+        displayName: 'Install dependencies'
 
-- script: |
-    pytest --cov=app
-  displayName: 'Get pytest-cov coverage'
+      - script: |
+          pytest tests/test*.py
+        displayName: 'Run pytest'
 
-- script: |
-    pylint **/*.py --disable=C
-  displayName: 'Run pylint'
-  # Below code from https://stackoverflow.com/questions/61710112/azure-devops-pipeline-fails-when-running-pylint
-  continueOnError: true
+      - script: |
+          pytest --cov=app
+        displayName: 'Get pytest-cov coverage'
 
-- script: |
-    echo "Building the Python application"
-    python -m compileall .
-  displayName: 'Build Python App'
+      - script: |
+          pylint **/*.py --disable=C
+        displayName: 'Run pylint'
+        # Below code from https://stackoverflow.com/questions/61710112/azure-devops-pipeline-fails-when-running-pylint
+        continueOnError: true
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.py'
-    targetFolder: '$(build.artifactStagingDirectory)'
+      - script: |
+          echo "Building the Python application"
+          python -m compileall .
+        displayName: 'Build Python App'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'drop'
+      - task: CopyFiles@2
+        inputs:
+          contents: '**/*.py'
+          targetFolder: '$(build.artifactStagingDirectory)'
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: '$(Build.ArtifactStagingDirectory)'
+          artifactName: 'drop'

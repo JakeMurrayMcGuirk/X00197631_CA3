@@ -34,6 +34,11 @@ I consulted Microsoft documentation and the lab material quite a bit while worki
 ### Multi-stage YAML configuration
 I used the Lab material and Microsoft's tutorial on creating multi-stage pipelines (https://learn.microsoft.com/en-us/azure/devops/pipelines/process/create-multistage-pipeline?view=azure-devops) to tweak my yml file to split my pipeline into stages.
 
+### Approval Gates
+After adding UAT's, I moved on to adding approval gates before I could deploy to a production environment. I used the lecture material along with Microsoft's documentation on creating approval gates (https://learn.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops).\
+I created a production environment on the Azure DevOps portal to avoid deploying the application to production without adding any approval checks, like with the deployment to test environment earlier.\
+After creating the production environment, I updated the .yml file with the necessary code to enable deployment to production environment once the UAT stage has been passed, pending approval by an approver (which is just me in this case).
+
 ## Branch policies and protection
 I removed the ability to force pushes to main and the ability to merge with main without a pull request or approval (self-approved via pull requests for this assignment).
 

@@ -179,3 +179,27 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFiles: '$(System.DefaultWorkingDirectory)/behave-results/*.xml'
+
+
+- stage: ProdTest
+  displayName: 'Deploy to Prod Environment'
+  dependsOn: UAT
+  jobs:
+  - deployment: DeployToProd
+    displayName: 'Deploy to Prod'
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(System.DefaultWorkingDirectory)'
+
+          - script: |
+              echo "Deploying application to Production environment"
+              ls
+            displayName: 'Simulate Prod Deployment'

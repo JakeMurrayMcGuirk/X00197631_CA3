@@ -3,11 +3,11 @@
 This project aimed to create a tool to enable the recording and tracking of events in a Gaelic Football match. I created the tool in Python and Azure DevOps to deploy it.
 
 ## Technologies Used
-Python
-Azure DevOps
-git
-GitHub
-VSCode (interpreter)
+Python\
+Azure DevOps\
+git\
+GitHub\
+VSCode (interpreter)\
 *Dependencies*: Pylint, pytest, behave
 
 ## CI Foundations
@@ -28,6 +28,7 @@ I used ChatGPT to aid in writing User Acceptance tests. I then corrected the err
 #### Integration with YAML
 
 ## CI Pipeline Implementation
+I consulted Microsoft documentation and the lab material quite a bit while working on the CI Pipeline integration for this project, especially while working with the yml file due to my lack of experience with YAML and software dev pipelines in general. Generative AI was also used to double-check my work on YAML files and to assist in certain issues I faced when configuring the yml file. One such example is when I wanted to go from a single-stage to multi-stage pipeline, and I didn't add "dependsOn" to each stage, with each stage running in parallel instead of depending on the previous stage.
 ### Multi-stage YAML configuration
 I used the Lab material and Microsoft's tutorial on creating multi-stage pipelines (https://learn.microsoft.com/en-us/azure/devops/pipelines/process/create-multistage-pipeline?view=azure-devops) to tweak my yml file to split my pipeline into stages.
 

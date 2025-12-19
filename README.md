@@ -90,7 +90,8 @@ I used pytest-benchmark to write performance tests for the application. I used t
 
 ## UAT Testing with behave
 ### UAT writing
-I used ChatGPT to aid in writing User Acceptance tests. I then corrected the errors from ChatGPT's generated code, as it got the order and format of outputs wrong. Initially it assumed player numbers were output as integers, that the events were output as dictionaries and that the events were only recorded in terms of outcomes (point, goal, wide) rather than including "shot" as the event, for example. I corrected all of these UATs to assert events correctly so that "shot" was asserted as it should be and added assertion for the outcome too to double-check it. I then wrapped the assertion for integers as a string so that it asserted player numbers correctly.
+I used ChatGPT to aid in writing User Acceptance tests. I then corrected the errors from ChatGPT's generated code, as it got the order and format of outputs wrong. Initially it assumed player numbers were output as integers, that the events were output as dictionaries and that the events were only recorded in terms of outcomes (point, goal, wide) rather than including "shot" as the event, for example. I corrected all of these UATs to assert events correctly so that "shot" was asserted as it should be and added assertion for the outcome too to double-check it. I then wrapped the assertion for integers as a string so that it asserted player numbers correctly. Results are reported in Azure DevOps.
+![alt text](image-7.png)
 
 ### Integration with YAML
 Had to re-configure the pipelines for the new repository name, as prior to submitting CA2 my repo was named "match-event-tracker". Created new pipeline due to the issues created from this name mismatch. DevOps threw error about repo being "permanently moved" and couldn't find a way to point it to new repo name. I had to approve use of the "test" environment to run the "Deploy to test" stage of my pipeline.
@@ -100,4 +101,5 @@ After adding UAT's, I moved on to adding approval gates before I could deploy to
 I created a production environment on the Azure DevOps portal to avoid deploying the application to production without adding any approval checks, like with the deployment to test environment earlier.\
 After creating the production environment, I updated the .yml file with the necessary code to enable deployment to production environment once the UAT stage has been passed, pending approval by an approver (which is just me in this case).
 ![alt text](image-3.png)
-
+![alt text](image-8.png)
+![alt text](image-9.png)

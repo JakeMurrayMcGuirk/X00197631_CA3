@@ -152,3 +152,15 @@ stages:
               echo "Deploying application to Test environment"
               ls
             displayName: 'Simulate Test Deployment'
+
+
+- stage: UAT
+  displayName: 'User Acceptance Testing'
+  dependsOn: Deploy_Test
+  jobs:
+  - job: RunUAT
+    steps:
+    - script: |
+        pip install -r dependencies.txt
+        behave
+      displayName: 'Run Behave UAT tests'

@@ -16,12 +16,14 @@ Python\
 pip\
 
 **Cloning repo**
-```git clone https://github.com/JakeMurrayMcGuirk/X00197631_CA2.git
+```
+git clone https://github.com/JakeMurrayMcGuirk/X00197631_CA2.git
 cd X00197631_CA2
 ```
 
 **Setting up venv**
-```python -m venv env
+```
+python -m venv env
 env/scripts/Activate
 ```
 

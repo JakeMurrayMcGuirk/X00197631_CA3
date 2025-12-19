@@ -39,6 +39,9 @@ def test_parse_input():
     for index, i in enumerate(test_inputs):
         assert parse_event(i) == expected_output[index]
 
+def test_parse_event():
+    assert parse_event("kow") == ['kickout', 'won', None]
+    assert parse_event("kol") == ['kickout', 'lost', None]
 
 def test_get_event():
     '''Tests the get_event function in stats_tagger.py'''
@@ -56,6 +59,7 @@ def test_get_event_rules():
     assert get_event_rules("shot") == {'outcome': True, 'player_no':True}
     assert get_event_rules("pass") == {'outcome':True, 'player_no':True}
     assert get_event_rules(None) is None
+    assert get_event_rules("nonexistent") is None
 
 def test_validate_event():
     '''Checks whether expected validation values are met by the validate_event function'''
@@ -84,6 +88,15 @@ def test_get_outcome():
     assert get_outcome("shot", "16") == (None, "16")
     assert get_outcome(None, None) == (None, None)
 
+# ChatGPT generated test function
+def test_get_outcome_all_shortcuts():
+    assert get_outcome("shot", "g10") == ("goal", "10")
+    assert get_outcome("shot", "p7") == ("point", "7")
+    assert get_outcome("shot", "2p5") == ("2 points", "5")
+    assert get_outcome("shot", "w3") == ("wide", "3")
+    assert get_outcome("pass", "c4") == ("complete", "4")
+    assert get_outcome("pass", "i1") == ("incomplete", "1")
+
 def test_get_player_no():
     '''Tests the get_player_no function in stats_tagger.py'''
     assert get_player_no("69696969") == "69696969"
@@ -95,6 +108,11 @@ def test_get_player_no():
     assert get_player_no(None) is None
     assert get_player_no("n5n") is None
     assert get_player_no("") is None
+    # ChatGPT assisted checks
+    # Number at the start should return last number only
+    assert get_player_no("12abc34") == "34"
+    # Only letters => None
+    assert get_player_no("abcdef") is None
 
 def test_delete_event():
     '''Tests that delete_event is working correctly'''

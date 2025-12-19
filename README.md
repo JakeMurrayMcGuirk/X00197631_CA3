@@ -22,6 +22,9 @@ I used pytest to create the unit tests for this program. I was unsure of the use
 ### Pylint
 As per the spec's suggestion I used Pylint to generate static code coverage statistics on my work. Since I wrote all of the unit tests by hand in CA2 and my lack of unit tests written, I fell short of the 80% enforced code coverage.
 
+### Dependency security testing
+Based my dependency security testing off of the lab material. Stored the NVD API Key as a variable in my environment to avoid leaking the API Key via my yml file accidentally.
+
 ### UAT
 #### UAT writing
 I used ChatGPT to aid in writing User Acceptance tests. I then corrected the errors from ChatGPT's generated code, as it got the order and format of outputs wrong. Initially it assumed player numbers were output as integers, that the events were output as dictionaries and that the events were only recorded in terms of outcomes (point, goal, wide) rather than including "shot" as the event, for example. I corrected all of these UATs to assert events correctly so that "shot" was asserted as it should be and added assertion for the outcome too to double-check it. I then wrapped the assertion for integers as a string so that it asserted player numbers correctly.

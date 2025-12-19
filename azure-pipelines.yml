@@ -180,10 +180,22 @@ stages:
       inputs:
         testResultsFiles: '$(System.DefaultWorkingDirectory)/behave-results/*.xml'
 
+- stage: PerformanceTesting
+  displayName: 'Performance Testing'
+  dependsOn: UAT
+  jobs:
+  - job: PerfTest
+    steps:
+    - script: |
+        pip install -r dependencies.txt
+        pip install pytest-benchmark
+        pytest tests/test_performance.py --benchmark-only
+      displayName: 'Run performance tests'
+
 
 - stage: ProdTest
   displayName: 'Deploy to Prod Environment'
-  dependsOn: UAT
+  dependsOn: PerformanceTesting
   jobs:
   - deployment: DeployToProd
     displayName: 'Deploy to Prod'

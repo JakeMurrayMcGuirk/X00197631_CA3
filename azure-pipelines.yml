@@ -156,7 +156,7 @@ stages:
 
 - stage: UAT
   displayName: 'User Acceptance Testing'
-  dependsOn: Deploy_Test
+  dependsOn: DeployTest
   jobs:
   - job: RunUAT
     steps:

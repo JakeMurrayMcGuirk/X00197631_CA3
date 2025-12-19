@@ -66,6 +66,9 @@ def validate_event(event_name, remaining_text, ruleset):
 
 def get_outcome(event, remaining_text):
     '''Takes in a string and extracts the outcome'''
+    # If event is none return none
+    if event is None:
+        return None
     # Checks if the event is in a list of possible outcomes
     if event not in outcomes:
         return None, remaining_text

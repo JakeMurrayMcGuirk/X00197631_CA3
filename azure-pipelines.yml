@@ -21,11 +21,11 @@ stages:
         displayName: 'Install dependencies'
 
       - script: |
-          pytest tests/test*.py
+          pytest tests/test*.py --junitxml=$(System.DefaultWorkingDirectory)/pytest-results.xml
         displayName: 'Run pytest'
 
       - script: |
-          pytest --cov=app
+          pytest --cov=app --cov-report=xml --cov-report=html
         displayName: 'Get pytest-cov coverage'
 
       - script: |
@@ -48,6 +48,18 @@ stages:
         inputs:
           pathToPublish: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'drop'
+      
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFiles: '$(System.DefaultWorkingDirectory)/pytest-results.xml'
+      
+      - task: PublishCodeCoverageResults@2
+        displayName: 'Publish code coverage results'
+        inputs:
+          summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
+          pathToSources: '$(System.DefaultWorkingDirectory)'
+          codeCoverageTool: 'Cobertura'
+          failIfCoverageEmpty: false
 
 
 
@@ -162,5 +174,8 @@ stages:
     steps:
     - script: |
         pip install -r dependencies.txt
-        behave
+        behave --junit --junit-directory $(System.DefaultWorkingDirectory)/behave-results
       displayName: 'Run Behave UAT tests'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/behave-results/*.xml'

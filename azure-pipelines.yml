@@ -124,7 +124,7 @@ stages:
         uploadReports: true
         uploadSARIFReport: true
         # failOnCVSS: '7' # <-- remove this line to avoid failing the job on high CVSS scores
-        nvdApiKey: 'your-nvd-api-key'  # Replace with your API key
+        nvdApiKey: '$(NVD_API_KEY)'
         additionalArguments: >
           --disableCentral
           --disableOssIndex

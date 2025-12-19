@@ -60,10 +60,12 @@ Bypassing of these settings is not allowed by admins.
 ## Testing Strategy
 ### Unit Tests
 I used pytest to create the unit tests for this program. I was unsure of the use of Generative AI allowed at the time of making CA2, so I decided to write all unit tests by hand. I used ChatGPT to assist in giving me ideas of what unit tests could increase coverage but I wrote all of the unit tests myself, only using ChatGPT or Gemini to aid with detecting minor errors and bugs in my code (such as accidentally asserting different dtypes).
+![alt text](image-4.png)
 
 ### Pylint
 As per the spec's suggestion I used Pylint to generate static code coverage statistics on my work. Since I wrote all of the unit tests by hand in CA2 and my lack of unit tests written, I fell short of the 80% enforced code coverage.
-
+![alt text](image-5.png)
+![alt text](image-6.png)
 
 ## Troubleshooting Guide
 If an issue arises when logging events, double check format is correct via *help* command (rule of thumb is event, outcome, player number). Feel free to log a ticket in the repo's "issue" section.
@@ -81,7 +83,7 @@ NVD API Keys stored as variables as stated previously.
 
 ## Security and Performance Testing
 ### Dependency security testing
-Based my dependency security testing off of the lab material. Stored the NVD API Key as a variable in my environment to avoid leaking the API Key via my yml file accidentally. Used OWASP Dependency check to check security of dependencies and for vulnerable packages. GitLeaks was configured to scan all commits and files. Results uploaded to pipeline as artifacts.
+Based my dependency security testing off of the lab material. Stored the NVD API Key as a variable in my environment to avoid leaking the API Key via my yml file accidentally. Used OWASP Dependency check to check security of dependencies and for vulnerable packages. GitLeaks was configured to scan all commits and files.
 
 ### Performance Testing
 I used pytest-benchmark to write performance tests for the application. I used the pytest-benchmark documentation (https://pytest-benchmark.readthedocs.io/en/latest/), and a browserstack tutorial (https://www.browserstack.com/guide/python-performance-testing) as well as assistance from ChatGPT to write my performance tests and integrate them with my Azure DevOps pipeline and yml file.
@@ -97,3 +99,5 @@ Had to re-configure the pipelines for the new repository name, as prior to submi
 After adding UAT's, I moved on to adding approval gates before I could deploy to a production environment. I used the lecture material along with Microsoft's documentation on creating approval gates (https://learn.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops).\
 I created a production environment on the Azure DevOps portal to avoid deploying the application to production without adding any approval checks, like with the deployment to test environment earlier.\
 After creating the production environment, I updated the .yml file with the necessary code to enable deployment to production environment once the UAT stage has been passed, pending approval by an approver (which is just me in this case).
+![alt text](image-3.png)
+

@@ -1,4 +1,5 @@
 pytest
 pytest-cov
+pytest-benchmark
 pylint
 behave==1.2.6

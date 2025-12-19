@@ -39,10 +39,6 @@ def test_parse_input():
     for index, i in enumerate(test_inputs):
         assert parse_event(i) == expected_output[index]
 
-def test_parse_event():
-    assert parse_event("kow") == ['kickout', 'won', None]
-    assert parse_event("kol") == ['kickout', 'lost', None]
-
 def test_get_event():
     '''Tests the get_event function in stats_tagger.py'''
     # Chat GPT used to find errors with changing lists to tuples

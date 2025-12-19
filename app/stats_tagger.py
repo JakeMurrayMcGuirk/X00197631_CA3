@@ -1,6 +1,7 @@
 '''Functions that collect user inputs and parse them into events'''
 # Importing dependencies
 import re
+import csv
 from app.utils import event_shortcuts, outcomes, outcome_shortcuts, event_categories, param_rules
 
 def get_event(event):
@@ -19,6 +20,7 @@ def get_event_rules(event_name):
     '''Get and return the ruleset for the input event'''
     if event_name is None:
         return None
+    event_category=None
     # Iterate through event_categories
     for e in event_categories:
         if event_name in event_categories[e]:
@@ -44,7 +46,7 @@ def validate_event(event_name, remaining_text, ruleset):
         if remaining_text is None:
             return False
         # Use regex to check if remaining text is just a digit
-        if re.search(r"^\d+", remaining_text):
+        if re.search(r"^\d+$", remaining_text):
             return False
         return True
     # If ruleset only allows for player_no and no outcome (e.g. foul)
@@ -142,3 +144,14 @@ def input_event():
     # Get event code and format it to remove all whitespace and make lowercase
     e = e.strip().lower().replace(" ", "")
     return e
+
+def export_events(match_events):
+    fields = ['Team', 'Event', 'Outcome', 'Player']
+    if match_events is not []:
+        with open("match_events.csv", "w", newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            for play in match_events:
+                event = play[0]
+                outcome = play[1]
+                player = play[2]
+                writer.writerow({'Team':'', 'Event' : event, 'Outcome' : outcome, 'Player' : player})

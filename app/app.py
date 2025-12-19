@@ -6,7 +6,7 @@ Checks that input is not "end game"
 Calls parse_event and stores the output (if any) in list match_events
 Repeats
 '''
-from app.stats_tagger import parse_event, input_event
+from app.stats_tagger import parse_event, input_event, export_events
 from app.utils import commands
 
 match_events = []
@@ -34,3 +34,4 @@ while event not in ("end game", "eg"):
 
 # Once match is done
 print(match_events)
+export_events(match_events)

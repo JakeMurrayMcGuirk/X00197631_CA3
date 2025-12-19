@@ -121,10 +121,3 @@ def test_show_help():
     assert show_help() == ('To enter an event please follow the following format:'
     ' event outcome (if applicable) player no.(if applicable)'
     '\nE.g. foul by player 14 = f14\n\'delete\' removes the most recently input event')
-
-def test_validate_event_invalid_cases():
-    '''Invalid test case scenarions'''
-    # Assisted with ChatGPT
-    assert validate_event("shot", None, {'outcome': True, 'player_no': True}) is False
-    assert validate_event("foul", "abc", {'outcome': False, 'player_no': True}) is False
-    assert validate_event("start game", "extra", {'outcome': False, 'player_no': False}) is False

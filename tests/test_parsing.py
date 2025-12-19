@@ -87,7 +87,9 @@ def test_get_outcome():
 
 # ChatGPT generated test function
 def test_get_outcome_all_shortcuts():
+    '''Tests shortcuts'''
     assert get_outcome("shot", "g10") == ("goal", "10")
+    assert get_outcome("shot", "g9") == ("goal" "9")
     assert get_outcome("shot", "p7") == ("point", "7")
     assert get_outcome("shot", "2p5") == ("2 points", "5")
     assert get_outcome("shot", "w3") == ("wide", "3")

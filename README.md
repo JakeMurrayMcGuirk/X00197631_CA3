@@ -13,7 +13,7 @@ VSCode (interpreter)\
 ## Local Development Setup
 **Prerequisites:**\
 Python\
-pip\
+pip
 
 **Cloning repo**
 ```

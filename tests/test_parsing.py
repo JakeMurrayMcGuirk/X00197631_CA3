@@ -47,6 +47,7 @@ def test_get_event():
     assert get_event("sw5") == ("shot", "w5")
     assert get_event("pofr65") == ("pass", "ofr65")
     assert get_event("zk69") == (None, "zk69")
+    assert get_event(None) is None
 
 def test_get_event_rules():
     '''Tests that the get_event_rules function is retrieving the correct rulesets'''
@@ -120,3 +121,10 @@ def test_show_help():
     assert show_help() == ('To enter an event please follow the following format:'
     ' event outcome (if applicable) player no.(if applicable)'
     '\nE.g. foul by player 14 = f14\n\'delete\' removes the most recently input event')
+
+def test_validate_event_invalid_cases():
+    '''Invalid test case scenarions'''
+    # Assisted with ChatGPT
+    assert validate_event("shot", None, {'outcome': True, 'player_no': True}) is False
+    assert validate_event("foul", "abc", {'outcome': False, 'player_no': True}) is False
+    assert validate_event("start game", "extra", {'outcome': False, 'player_no': False}) is False

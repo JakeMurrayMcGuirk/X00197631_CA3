@@ -29,6 +29,9 @@ I used ChatGPT to aid in writing User Acceptance tests. I then corrected the err
 #### Integration with YAML
 Had to re-configure the pipelines for the new repository name, as prior to submitting CA2 my repo was named "match-event-tracker". Created new pipeline due to the issues created from this name mismatch. DevOps threw error about repo being "permanently moved" and couldn't find a way to point it to new repo name. I had to approve use of the "test" environment to run the "Deploy to test" stage of my pipeline.
 
+### Performance Testing
+I used pytest-benchmark to write performance tests for the application. I used the pytest-benchmark documentation (https://pytest-benchmark.readthedocs.io/en/latest/), and a browserstack tutorial (https://www.browserstack.com/guide/python-performance-testing) as well as assistance from ChatGPT to write my performance tests and integrate them with my Azure DevOps pipeline and yml file.
+
 ## CI Pipeline Implementation
 I consulted Microsoft documentation and the lab material quite a bit while working on the CI Pipeline integration for this project, especially while working with the yml file due to my lack of experience with YAML and software dev pipelines in general. Generative AI was also used to double-check my work on YAML files and to assist in certain issues I faced when configuring the yml file. One such example is when I wanted to go from a single-stage to multi-stage pipeline, and I didn't add "dependsOn" to each stage, with each stage running in parallel instead of depending on the previous stage.
 ### Multi-stage YAML configuration
